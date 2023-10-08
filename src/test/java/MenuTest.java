@@ -1,11 +1,4 @@
-package test;
-
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-
-import main.java.tech.fall.Menu;
-
-
+import com.mnz.game.Menu;
 
 public class MenuTest {
     // Test menu functionality
@@ -16,4 +9,6 @@ public class MenuTest {
         mainMenu.openMainMenu();
         assertEquals(true, mainMenu.isOpen());
     }
+
+
 }
