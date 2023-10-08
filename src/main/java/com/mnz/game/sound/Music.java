@@ -1,4 +1,4 @@
-package main.java.tech.fall.sound;
+package com.mnz.game.sound;
 
 import java.io.*;
 import javax.sound.sampled.*;

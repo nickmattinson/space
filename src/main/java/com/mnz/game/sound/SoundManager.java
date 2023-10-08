@@ -1,4 +1,4 @@
-package main.java.tech.fall.sound;
+package com.mnz.game.sound;
 
 public class SoundManager {
     
