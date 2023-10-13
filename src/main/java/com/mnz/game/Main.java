@@ -29,8 +29,10 @@ public class Main {
         Menu mainMenu = new Menu();
 
         // Declare Variables
-        final String relativeMenuMusicPath = "src\\main\\music\\spacehop.wav";
-        //final String relative2ssongsv2MusicPath = "src\\main\\music\\2ssongsv2.wav";
+        final String relativeMenuMusicPath = "src\\main\\resources\\sounds\\2ssongsv2.wav";
+
+        //functions now (old main method, need to convert back to main2. or bring main2 code 
+        //to this main method and delete this code)
 
         //this line of code allows the game to run using EDT (Event Dispatch Thread)
         SwingUtilities.invokeLater(new Runnable() {
@@ -38,7 +40,6 @@ public class Main {
             public void run() {
                 // Open main menu
                 mainMenu.openMainMenu();
-
                 // Play menu music
                 menuMusic.playMusic(relativeMenuMusicPath);
             }

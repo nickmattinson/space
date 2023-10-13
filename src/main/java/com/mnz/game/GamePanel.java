@@ -14,7 +14,7 @@ import com.mnz.game.util.KeyHandler;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    // screen settings
+    // Screen settings
     final int originalTileSize = 32;
     final int scale = 1;
     public final int tileSize = originalTileSize * scale;
@@ -23,14 +23,14 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenWidth = tileSize * maxScreenCol;  // 1024 pixels
     public final int screenHeight = tileSize * maxScreenRow;  // 768 pixels
 
-    int FPS = 60; // frames per second
+    int FPS = 60; // Frames per second
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
     Star star = new Star(this);
     Planet planet = new Planet(this);
-    //StarManager starmgr = new StarManager(this, 5);
+    // StarManager starmgr = new StarManager(this, 5);
 
 
     public GamePanel() {

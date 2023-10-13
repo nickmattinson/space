@@ -35,7 +35,7 @@ public class Menu {
     }
 
     // Methods
-    public void openMainMenu(){
+    public void openMainMenu(GamePanel gp){
         // Create a JFrame instance v1
         JFrame frame = new JFrame("NovaFlux");
 
@@ -74,11 +74,11 @@ public class Menu {
         centerSpace.add(play);
         centerSpace.add(enterUsername);
 
-        //make play button work
+        // Make play button work
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\sprites\\spaceship_middle_class.png");
+                ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\resources\\player\\ship_1.png");
                 Image playerSpriteImage = playerSpriteIcon.getImage();
                 JLabel playerSpriteLabel = new JLabel(new ImageIcon(playerSpriteImage));
                 centerSpace.add(playerSpriteLabel);

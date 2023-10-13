@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class StarArrayFrame extends JFrame {
@@ -15,11 +16,17 @@ public class StarArrayFrame extends JFrame {
     private static final int NUM_CIRCLES = 400; // Number of circles in the array
 
     public StarArrayFrame() {
-        setTitle("Circle Array Example");
-        setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        this.setTitle("Circle Array Example");
+        this.setSize(WIDTH, HEIGHT);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        // Create a custom JPanel for drawing
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK); // Set the background color to black
+        this.add(panel);
+
+        this.setVisible(true);
     }
 
     @Override
@@ -35,7 +42,7 @@ public class StarArrayFrame extends JFrame {
             Random random = new Random();
             int diameter = random.nextInt(7) + 1;
 
-            g2d.setColor(Color.BLUE); // Set the circle color
+            g2d.setColor(Color.white); // Set the circle color
             g2d.fillOval(x, y, diameter, diameter); // Draw the circle
         }
     }
