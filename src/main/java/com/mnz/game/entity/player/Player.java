@@ -57,7 +57,6 @@ public class Player extends Entity{
     }
 
     public void update() {
-
         if(keyH.upPressed == true) {
             direction = "up";
             setSpeed(speed +.1);
@@ -75,16 +74,11 @@ public class Player extends Entity{
             direction = "right";
             //x += speed;
             setHeading(heading + 1);
-
-
         }
         //System.out.println(this.toString());  // debug 
         this.x = (int) (this.x + (this.speed * Math.sin(this.heading * Math.PI / 180)));
         this.y = (int) (this.y - (this.speed * Math.cos(this.heading * Math.PI / 180)));
-
-
     }
- 
 
     public void draw(Graphics2D g2) {
 
@@ -109,8 +103,6 @@ public class Player extends Entity{
         }
         //g2.rotate(Math.toRadians(heading), gp.tileSize, gp.tileSize);
 
-
-
         final double rads = Math.toRadians(heading);
         final double sin = Math.abs(Math.sin(rads));
         final double cos = Math.abs(Math.cos(rads));
@@ -125,16 +117,12 @@ public class Player extends Entity{
         rotateOp.filter(image,rotatedImage);
         g2.drawImage(rotatedImage, x, y, w,h, null );
         g2.dispose();
-
     }
 
-
     public String toString(){
-
         String out = super.toString();
         out += String.format("Player: %s\n", "additional player info");
         return out;
-
     }
 
     public static void main(String[] args){
@@ -150,14 +138,5 @@ public class Player extends Entity{
         p.setSpeed(12.23f);
         p.move();
         System.out.println(p.toString());  // output to debug console
-
     }
-
-
-
-    /*  // Create player in main window (This only works in the Menu.java file)
-        ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\sprites\\spaceship_middle_class.png");
-        Image playerSpriteImage = playerSpriteIcon.getImage();
-        JLabel playerSpriteLabel = new JLabel(new ImageIcon(playerSpriteImage));
-        centerSpace.add(playerSpriteLabel); */
 }
