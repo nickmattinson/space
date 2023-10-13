@@ -1,29 +1,14 @@
 package com.mnz.game;
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import com.mnz.game.sound.Music;
 
-/*
-* Author: N. Mattinson
-* Date: 01/10/23
-* Main.java    
-* 
-* Attributes:
-* =menuMusic:Music
-* =mainMenu:Menu
-* XrelativeMenuMusicPath:String
-* Xrelative2ssongsv2MusicPath:String
-* 
-* Constructors:
-* +main()
-* 
-* Methods:
-* +run():void
-*  
-*/
-
 public class Main {
-    public static void main(String[] args) {
+
+    public static JFrame window;
+    public static void main(String[] args){
         // Create music and menu instance
         Music menuMusic = new Music();
         Menu mainMenu = new Menu();
@@ -31,18 +16,36 @@ public class Main {
         // Declare Variables
         final String relativeMenuMusicPath = "src\\main\\resources\\sounds\\2ssongsv2.wav";
 
-        //functions now (old main method, need to convert back to main2. or bring main2 code 
-        //to this main method and delete this code)
+        window = new JFrame();
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("2D Space Adventure");
 
-        //this line of code allows the game to run using EDT (Event Dispatch Thread)
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
+        
+        //gamePanel.getConfig().loadConfig();
+
+        if (gamePanel.isFullScreenOn()) {
+            window.setUndecorated(true);
+        }
+        
+        window.pack();
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        gamePanel.setUpGame();
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 // Open main menu
-                mainMenu.openMainMenu();
+                //mainMenu.openMainMenu(gamePanel);
                 // Play menu music
                 menuMusic.playMusic(relativeMenuMusicPath);
             }
-        }); 
+        });
+        gamePanel.startGameThread();
+        
     }
+    
 }
