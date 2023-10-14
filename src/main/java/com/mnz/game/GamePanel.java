@@ -178,8 +178,6 @@ public class GamePanel extends JPanel implements Runnable{
         star.draw(g2d); 
         player.draw(g2d);
         planet.draw(g2d);
-
-
         //starmgr.draw(g2);
         //***************************************WORK ON THIS PART TO GET STAR AND PLANET IMPLEMENTED. */
     }
