@@ -12,18 +12,60 @@ import com.mnz.game.entity.star.Star;
 import com.mnz.game.sound.Music;
 import com.mnz.game.util.KeyHandler;
 
+/*
+* Author: N. Mattinson & M. Mattinson
+* Last Date Updated: 14 OCT 23
+* GamePanel.java
+* 
+* Attributes:
+* .originalTileSize: int
+* .scale:int
+* +.tileSize:int
+* .maxScreenCol:int
+* .maxScreenRow:int
+* +.screenWidth:int
+* +.screenHeight:int
+* FPS:int
+* gameThread:GameThread
+* player:Player
+* star:Star
+* planet:Planet
+* +menuMusic:Music
+* +mainMenu:Menu
+* menuIsOpen:boolean
+* pauseButtonClicked:boolean
+* gameStarted:boolean
+* 
+* Constructors:
+* +GamePanel()
+* 
+* Methods:
+* startGameThread():void
+* run():void
+* startMenu():void
+* update():void
+* paintComponent(Graphics):void
+* setUpGame():void
+* switchToMenu():void
+* switchToPlaying():void
+* getConfig():Object
+* isFullScreenOn():boolean
+*
+*/
+
 public class GamePanel extends JPanel implements Runnable{
     // Screen settings
     final int originalTileSize = 32;
     final int scale = 1;
-    public final int tileSize = originalTileSize * scale;
     final int maxScreenCol = 60;
     final int maxScreenRow = 40;
-    public final int screenWidth = tileSize * maxScreenCol;  // 1024 pixels
-    public final int screenHeight = tileSize * maxScreenRow;  // 768 pixels
+    public final int tileSize = originalTileSize * scale;
+    public final int screenWidth = tileSize * maxScreenCol;  // 1920 pixels
+    public final int screenHeight = tileSize * maxScreenRow;  // 1280 pixels
 
     int FPS = 60; // Frames per second
 
+    // Create Objects from Classes
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
@@ -34,6 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
     // Create music and menu instance
     public static Music menuMusic = new Music();
     public static Menu mainMenu = new Menu();
+    public static GameState gameState;
 
     // Declare Variables
     static boolean menuIsOpen = false;
@@ -44,8 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
         MENU, PLAYING;
     }
 
-    public static GameState gameState;
-
+    // Constructor (empty)
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -56,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
         gameState = GameState.MENU; // Set the initial state to MENU
     }
 
+    // Methods
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
@@ -122,6 +165,7 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
+
     public void update() {
         player.update();
         //starmgr.update();
@@ -129,7 +173,7 @@ public class GamePanel extends JPanel implements Runnable{
         planet.update();
     }
     
-    // draw game components
+    // Draw game components
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

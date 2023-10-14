@@ -10,20 +10,28 @@ import com.mnz.game.GamePanel.GameState;
 
 /*
 * Author: N. Mattinson
-* Date: 13 OCT 23
+* Date: 14 OCT 23
 * Menu.java
 * 
 * Attributes:
-* -isOpen:boolean
+* +.relativeMenuMusicPath:String
+* +.playButton:JButton
+* +.mainMenuTitle:JLabel
+* +toolBar:JPanel
+* +leftSide:JPanel
+* +rightSide:JPanel
+* +centerSpace:JPanel
+* +enterUsername:JTextField
+* +customFont:Font
+* + frame:JFrame
 * 
 * Constructors:
-* +Music()
+* +Menu()
 * 
 * Methods:
 * +openMainMenu():void
 * +isOpen():boolean
-* +setOpen():void
-* +toString():String
+* +playButtonClicked():void
 *
 */
 

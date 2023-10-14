@@ -1,6 +1,23 @@
 package com.mnz.game;
 
 import javax.swing.JFrame;
+
+/*
+* Author: M. Mattinson & N. Mattinson
+* Date: 14 OCT 23
+* Main.java
+* 
+* Attributes:
+* +window:JFrame
++ +gamePanel:GamePanel
+* 
+* Constructors:
+* +Main()
+* 
+* Methods:
+* +main(String[]
+*
+*/
 public class Main {
     public static JFrame window;
     public static GamePanel gamePanel = new GamePanel();
@@ -12,7 +29,7 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Nova Flux");
         window.add(gamePanel);
-        //********************* What is this if statement doing?? ****************************
+        //********************* What is this if statement doing?? ****************************//
         if (gamePanel.isFullScreenOn()) {
             window.setUndecorated(true);
         }
