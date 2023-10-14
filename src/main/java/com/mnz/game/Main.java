@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 * +Main()
 * 
 * Methods:
-* +main(String[]
+* +main(String[])
 *
 */
 public class Main {

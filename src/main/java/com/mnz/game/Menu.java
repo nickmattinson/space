@@ -101,10 +101,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e){
                 GamePanel.menuIsOpen = false;
-                /* ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\resources\\player\\ship_1.png");
-                Image playerSpriteImage = playerSpriteIcon.getImage();
-                JLabel playerSpriteLabel = new JLabel(new ImageIcon(playerSpriteImage));
-                centerSpace.add(playerSpriteLabel); */
+                
                 mainMenuTitle.setVisible(false);
                 playButton.setVisible(false);
                 enterUsername.setVisible(false);
