@@ -29,7 +29,7 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Nova Flux");
         window.add(gamePanel);
-        //********************* What is this if statement doing?? ****************************//
+
         if (gamePanel.isFullScreenOn()) {
             window.setUndecorated(true);
         }

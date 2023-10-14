@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.mnz.game.GamePanel.GameState;
+import com.mnz.game.sound.Music;
 
 /*
 * Author: N. Mattinson
@@ -37,7 +38,10 @@ import com.mnz.game.GamePanel.GameState;
 
 public class Menu {
     // Declare Variables
-    public final String relativeMenuMusicPath = "src\\main\\resources\\sounds\\spacehop.wav";
+    public final String relativeMenuMusicPath = "src\\main\\resources\\sounds\\2ssongsv2.wav";
+    public static String spawnMusic = "src\\main\\resources\\sounds\\spacehop.wav";
+    public final String galaxyMusic = "src\\main\\resources\\sounds\\ship_is_hit.wav";
+    public final String battleMusic = "src\\main\\resources\\sounds\\shields_up.wav";
     public final JButton playButton = new JButton("PLAY");
     public final JLabel mainMenuTitle = new JLabel("NOVA FLUX");
     public JPanel toolBar = new JPanel();;
@@ -54,16 +58,13 @@ public class Menu {
     }
 
     // Methods
-    public void openMainMenu(GamePanel gp, JFrame frame){
+    public void openMainMenu(GamePanel gp, JFrame frame, int screenHeight, int screenWidth){
         this.frame = frame;
         // Create JPanels
-        //toolBar = new JPanel();
-        //leftSide = new JPanel();
-        //rightSide = new JPanel();
         centerSpace = new JPanel();
 
         // Format each panel
-        centerSpace.setPreferredSize(new Dimension(1000, 600));
+        centerSpace.setPreferredSize(new Dimension(screenHeight , screenWidth));
         centerSpace.setBackground(Color.black);
 
         //build framework for main menu
@@ -82,7 +83,7 @@ public class Menu {
         //centerSpace.add(enterUsername);
 
         // Play menu music
-        GamePanel.menuMusic.playMusic(relativeMenuMusicPath);
+        Music.playMusic(relativeMenuMusicPath);
 
         // Add panels to the main window
         frame.add(leftSide, BorderLayout.LINE_START);
@@ -101,21 +102,22 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e){
                 GamePanel.menuIsOpen = false;
-                
+                GamePanel.gameState = GameState.PLAYING;
                 mainMenuTitle.setVisible(false);
                 playButton.setVisible(false);
                 enterUsername.setVisible(false);
                 centerSpace.setVisible(false);
-                GamePanel.gameState = GameState.PLAYING;
-                //isOpen = false;
+                Music.stopMusic(relativeMenuMusicPath);
             }
         });
         return true;
     }
 
     public void closeMenu(){
-        mainMenuTitle.setVisible(false);
-        playButton.setVisible(false);
-        enterUsername.setVisible(false);
+        centerSpace.setVisible(false);
+    }
+
+    public void openMenu(){
+        centerSpace.setVisible(true);
     }
 }

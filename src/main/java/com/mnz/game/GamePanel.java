@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
     // StarManager starmgr = new StarManager(this, 5);
 
     // Create music and menu instance
-    public static Music menuMusic = new Music();
+    public static Music music = new Music();
     public static Menu mainMenu = new Menu();
     public static GameState gameState;
 
@@ -82,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable{
     static boolean menuIsOpen = false;
     static boolean pauseButtonClicked = false;
     static boolean gameStarted = false;
+    static boolean musicIsPlaying = false;
 
     public enum GameState {
         MENU, PLAYING;
@@ -110,30 +111,24 @@ public class GamePanel extends JPanel implements Runnable{
             // Game logic (physics, AI, etc.)
             double drawInterval = 1000000000 / FPS; // 0.0166666 seconds
             double nextDrawTime = System.nanoTime() + drawInterval;
-            // Update game objects
-            // Handle player input
+            
             // Render the game
             while(gameThread != null) {
                 if (gameState == GameState.MENU) { 
-                    // When you're done with the menu (e.g., the player clicks a button to start the game), switch back to PLAYING
+                    // When you're done with the menu, switch back to PLAYING
                     while (mainMenu.playButtonClicked() && gameStarted == true){    
                         menuIsOpen = false; // Reset the menuIsOpen flag
-                        gameStarted = false;
+                        gameStarted = true;
                         gameState = GameState.PLAYING;
                     }
                 }
                 if (gameState == GameState.PLAYING) {
-                    if (!gameStarted){
-                        // Display the menu only once
-                        mainMenu.openMainMenu(this, Main.window);
-                        menuIsOpen = true; // Set the menuIsOpen flag to true
-                        gameStarted = true;
-                    }
-                    // step 1 - UPDATE player position
                     update();
-                    // step 2 - DRAW screen with updated info
                     repaint();
-                    
+                    if (!musicIsPlaying){
+                        Music.playMusic(Menu.spawnMusic);
+                        musicIsPlaying = true;
+                    }
                     try {
                         double remainingTime = nextDrawTime - System.nanoTime();
                         remainingTime = remainingTime / 1000000;
@@ -160,7 +155,7 @@ public class GamePanel extends JPanel implements Runnable{
         if (gameState == GameState.MENU) {
             if (!menuIsOpen) {
                 // Display the menu only once
-                mainMenu.openMainMenu(this, Main.window);
+                mainMenu.openMainMenu(this, Main.window, screenHeight, screenWidth);
                 menuIsOpen = true; // Set the menuIsOpen flag to true
             }
         }
