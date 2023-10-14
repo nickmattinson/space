@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import com.mnz.game.GamePanel.GameState;
+
 /*
 * Author: N. Mattinson
 * Date: 13 OCT 23
@@ -36,9 +38,8 @@ public class Menu {
     public JPanel centerSpace = new JPanel();;
     public JTextField enterUsername;
     public Font customFont;
+    public JFrame frame;
     
-    //protected boolean isOpen = false;
-
     // Constructors
     public Menu (){     // Empty constructor
 
@@ -46,14 +47,15 @@ public class Menu {
 
     // Methods
     public void openMainMenu(GamePanel gp, JFrame frame){
+        this.frame = frame;
         // Create JPanels
-        toolBar = new JPanel();
-        leftSide = new JPanel();
-        rightSide = new JPanel();
+        //toolBar = new JPanel();
+        //leftSide = new JPanel();
+        //rightSide = new JPanel();
         centerSpace = new JPanel();
 
         // Format each panel
-        centerSpace.setPreferredSize(new Dimension(1720, 880));
+        centerSpace.setPreferredSize(new Dimension(1000, 600));
         centerSpace.setBackground(Color.black);
 
         //build framework for main menu
@@ -67,9 +69,9 @@ public class Menu {
         enterUsername.setFont(customFont);
 
         // Add components to the center panel
-        centerSpace.add(mainMenuTitle);
+        //centerSpace.add(mainMenuTitle);
         centerSpace.add(playButton);
-        centerSpace.add(enterUsername);
+        //centerSpace.add(enterUsername);
 
         // Play menu music
         GamePanel.menuMusic.playMusic(relativeMenuMusicPath);
@@ -91,13 +93,15 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e){
                 GamePanel.menuIsOpen = false;
-                ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\resources\\player\\ship_1.png");
+                /* ImageIcon playerSpriteIcon = new ImageIcon("src\\main\\resources\\player\\ship_1.png");
                 Image playerSpriteImage = playerSpriteIcon.getImage();
                 JLabel playerSpriteLabel = new JLabel(new ImageIcon(playerSpriteImage));
-                centerSpace.add(playerSpriteLabel);
+                centerSpace.add(playerSpriteLabel); */
                 mainMenuTitle.setVisible(false);
                 playButton.setVisible(false);
                 enterUsername.setVisible(false);
+                centerSpace.setVisible(false);
+                GamePanel.gameState = GameState.PLAYING;
                 //isOpen = false;
             }
         });

@@ -41,10 +41,10 @@ public class GamePanel extends JPanel implements Runnable{
     static boolean gameStarted = false;
 
     public enum GameState {
-        PLAYING, MENU;
+        MENU, PLAYING;
     }
 
-    private GameState gameState;
+    public static GameState gameState;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -64,20 +64,28 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
         while (true){
-            if (gameState == GameState.PLAYING) {
-                if (!gameStarted){
-                    // Display the menu only once
-                    mainMenu.openMainMenu(this, Main.window);
-                    menuIsOpen = true; // Set the menuIsOpen flag to true
-                    gameStarted = true;
+            // Game logic (physics, AI, etc.)
+            double drawInterval = 1000000000 / FPS; // 0.0166666 seconds
+            double nextDrawTime = System.nanoTime() + drawInterval;
+            // Update game objects
+            // Handle player input
+            // Render the game
+            while(gameThread != null) {
+                if (gameState == GameState.MENU) { 
+                    // When you're done with the menu (e.g., the player clicks a button to start the game), switch back to PLAYING
+                    while (mainMenu.playButtonClicked() && gameStarted == true){    
+                        menuIsOpen = false; // Reset the menuIsOpen flag
+                        gameStarted = false;
+                        gameState = GameState.PLAYING;
+                    }
                 }
-                // Game logic (physics, AI, etc.)
-                double drawInterval = 1000000000 / FPS; // 0.0166666 seconds
-                double nextDrawTime = System.nanoTime() + drawInterval;
-                // Update game objects
-                // Handle player input
-                // Render the game
-                while(gameThread != null) {
+                if (gameState == GameState.PLAYING) {
+                    if (!gameStarted){
+                        // Display the menu only once
+                        mainMenu.openMainMenu(this, Main.window);
+                        menuIsOpen = true; // Set the menuIsOpen flag to true
+                        gameStarted = true;
+                    }
                     // step 1 - UPDATE player position
                     update();
                     // step 2 - DRAW screen with updated info
@@ -111,14 +119,6 @@ public class GamePanel extends JPanel implements Runnable{
                 // Display the menu only once
                 mainMenu.openMainMenu(this, Main.window);
                 menuIsOpen = true; // Set the menuIsOpen flag to true
-            }
-            // Handle menu input...
-            
-            // When you're done with the menu (e.g., the player clicks a button to start the game), switch back to PLAYING
-            if (mainMenu.playButtonClicked()){    
-                menuIsOpen = false; // Reset the menuIsOpen flag
-                gameStarted = false;
-                gameState = GameState.PLAYING;
             }
         }
     }
