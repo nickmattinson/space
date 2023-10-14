@@ -86,9 +86,6 @@ public class Menu {
         Music.playMusic(relativeMenuMusicPath);
 
         // Add panels to the main window
-        frame.add(leftSide, BorderLayout.LINE_START);
-        frame.add(toolBar, BorderLayout.PAGE_START);
-        frame.add(rightSide, BorderLayout.LINE_END);
         frame.add(centerSpace, BorderLayout.CENTER);
 
         // Make the JFrame visible

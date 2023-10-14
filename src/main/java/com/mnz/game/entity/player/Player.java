@@ -12,21 +12,17 @@ import com.mnz.game.GamePanel;
 import com.mnz.game.entity.Entity;
 import com.mnz.game.util.KeyHandler;
 
-
-
-
-
 public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
+    boolean imageIsRead;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
         setDefaultValues();
         getPlayerImage();
-
     }
 
     public void setDefaultValues() {
@@ -41,6 +37,10 @@ public class Player extends Entity{
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/ship_1.png"));
             //up1 = ImageIO.read(getClass().getResource("resources/player/ship_1.png"));
+            if (up1 != null){
+                imageIsRead = true;
+            }
+            System.out.println("player image read properly: " + imageIsRead);
 
             up2 = up1;
             down1 = up1;
@@ -52,7 +52,6 @@ public class Player extends Entity{
 
         } catch(IOException e) {
             e.printStackTrace();
-
         }
     }
 
@@ -81,28 +80,24 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) {
-
-        //g2.setColor(Color.WHITE);
-        //g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
+        super.paint(g2);
         BufferedImage image = null;
-
-        switch(direction) {
-        case "up":
-            image = up1;
-            break;
-        case "down":
-            image = down1;
-            break;
-        case "left":
-            image = left1;
-            break;
-        case "right":
-            image = right1;
-            break;
+    
+        switch (direction) {
+            case "up":
+                image = up1;
+                break;
+            case "down":
+                image = down1;
+                break;
+            case "left":
+                image = left1;
+                break;
+            case "right":
+                image = right1;
+                break;
         }
-        //g2.rotate(Math.toRadians(heading), gp.tileSize, gp.tileSize);
-
+    
         final double rads = Math.toRadians(heading);
         final double sin = Math.abs(Math.sin(rads));
         final double cos = Math.abs(Math.cos(rads));
@@ -111,13 +106,19 @@ public class Player extends Entity{
         final BufferedImage rotatedImage = new BufferedImage(w, h, image.getType());
         final AffineTransform at = new AffineTransform();
         at.translate(w / 2, h / 2);
-        at.rotate(rads,0, 0);
+        at.rotate(rads, 0, 0);
         at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+    
         final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        rotateOp.filter(image,rotatedImage);
-        g2.drawImage(rotatedImage, x, y, w,h, null );
-        g2.dispose();
-    }
+        rotateOp.filter(image, rotatedImage);
+        
+        // Calculate the position to draw the rotated image
+        int drawX = x - (w - image.getWidth()) / 2;
+        int drawY = y - (h - image.getHeight()) / 2;
+        System.out.println("( " + drawX + ", " + drawY + ")");
+    
+        g2.drawImage(rotatedImage, drawX, drawY, w, h, null);
+    }    
 
     public String toString(){
         String out = super.toString();

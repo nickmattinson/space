@@ -1,1 +1,10 @@
-test z
+public static void main(String[] args){
+        // test toString() method
+        GamePanel gp = new GamePanel();
+        Star s = new Star(gp);
+        s.setName("Test star");
+        s.setX(300);
+        s.setY(300);
+        System.out.println(s.toString());  // output to debug console
+
+    }

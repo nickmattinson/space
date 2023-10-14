@@ -75,11 +75,14 @@ public class Planet extends Entity {
     String[] uniqueFeatures = new String[uniqueListLength];
     boolean isDay;      //true = day      false = night
 
+    String bluePlanetPath = "/planets/blue_planet.png";
+    String purplePlanetPath = "/planets/purple_planet.png";
+
     GamePanel gp;
 
     public Planet(GamePanel gp) {
         this.gp = gp;
-        getPlanetImage();
+        getPlanetImage(bluePlanetPath);
 
     }
 
@@ -253,9 +256,9 @@ public class Planet extends Entity {
                 + ", isDay=" + isDay + "]";
     }
 
-    public void getPlanetImage() {
+    public void getPlanetImage(String planetPath) {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/planets/blue_planet.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream(planetPath));
             //up1 = ImageIO.read(getClass().getResource("resources/player/ship_1.png"));
 
             up2 = up1;

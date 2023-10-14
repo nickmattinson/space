@@ -162,24 +162,25 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-        player.update();
-        //starmgr.update();
         star.update();
         planet.update();
+        player.update();
+        //starmgr.update();
     }
     
     // Draw game components
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-        player.draw(g2);
-        //starmgr.draw(g2);
+        Graphics2D g2d = (Graphics2D) g;
 
+        // This order is super important! == Layering in the window  [highest in list is furthest back, lowest on list is closest]
+        star.draw(g2d);
+        planet.draw(g2d);
+        player.draw(g2d); 
+
+        //starmgr.draw(g2);
         //***************************************WORK ON THIS PART TO GET STAR AND PLANET IMPLEMENTED. */
-        star.draw(g2);
-        planet.draw(g2);
-        //g2.dispose();
     }
 
     public void setUpGame() {
@@ -191,6 +192,8 @@ public class GamePanel extends JPanel implements Runnable{
         System.out.println(star.toString());  // output to debug console
         planet.setX(700);
         planet.setY(400);
+
+        star.setUpStars();
     }
 
     public void switchToMenu() {
